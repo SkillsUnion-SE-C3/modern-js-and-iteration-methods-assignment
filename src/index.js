@@ -35,7 +35,10 @@ Divide by 5, then multiply by 9, then add 32
 
 
 
-
+const temp = weeklyForecast.map((item) => {
+  item.temperature = Math.floor((item.temperature / 5) * 9 + 32);
+  return item;
+});
 
 
 
@@ -59,7 +62,9 @@ Divide by 5, then multiply by 9, then add 32
 */
 
 
-
+const onlySunny = weeklyForecast.filter((item) => {
+  return item.cloudCoverage === "clear" || item.cloudCoverage === "few";
+});
 
 
 /*
@@ -75,6 +80,18 @@ const friday = weeklyForecast[5]
 const saturday = weeklyForecast[6]
 const sunday = weeklyForecast[7]
 
+
+const [
+  monday,
+  tuesday,
+  wednesday,
+  thursday,
+  friday,
+  saturday,
+  sunday
+] = weeklyForecast;
+
+
 /*
   Destructuring objects - 
   Refactor the code below to use destructuring to assign values to these 3 variables
@@ -84,7 +101,7 @@ const mondayTemperature = monday.temperature
 const mondayCloudCoverage = monday.cloudCoverage
 const mondayWind = monday.wind
 
-
+const { temperature, cloudCoverage, wind } = monday;
 
 /*Spread operator*/
 
@@ -98,7 +115,7 @@ The new sunday object should look like this:
 {day: "Sunday", temperature: 17, cloudCoverage: "broken", wind: 30}
 */
 
-
+const sundayObject = { ...weeklyForecast, cloudCoverage: "broken" };
 
 /* 
   We need to generate a biweekly forecast from 2 weekly forecasts. 
@@ -126,4 +143,4 @@ const weekTwoForecast = [
   { day: "Sunday", temperature: 17, cloudCoverage: "overcast", wind: 30 }
 ]
 
-const biweeklyForecast = []
+const biweeklyForecast = [...weekOneForecast, ...weekTwoforecast];
