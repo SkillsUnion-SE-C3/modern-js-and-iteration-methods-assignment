@@ -34,9 +34,15 @@ Divide by 5, then multiply by 9, then add 32
 */
 
 
-
-
-
+const celciusToFaherenheit = weeklyForecast.map((dayForecast) => {
+  const temp = dayForecast.temperature;
+  //return Math.floor((temp / 5) * 9 + 32);
+  const tempFah = Math.floor((temp / 5) * 9 + 32);
+  //return { day: weeklyForecast.day, temperature: tempFah, cloudCoverage: weeklyForecast.cloudCoverage, wind: weeklyForecast.wind }
+  return { ...dayForecast, temperature: tempFah }
+});
+//
+//console.log(celciusToFaherenheit);
 
 
 
@@ -58,8 +64,14 @@ Divide by 5, then multiply by 9, then add 32
 
 */
 
+const sunDays = weeklyForecast.filter((sunnyday) => {
+  const cloud = sunnyday.cloudCoverage
+  if (cloud === "clear" || cloud === "few") {
+    return true
+  }
 
-
+})
+//console.log(sunDays)
 
 
 /*
@@ -67,24 +79,33 @@ Divide by 5, then multiply by 9, then add 32
   Refactor the code below to use destructuring to assign values to these 7 variables
 */
 
-const monday = weeklyForecast[1]
-const tuesday = weeklyForecast[2]
-const wednesday = weeklyForecast[3]
-const thursday = weeklyForecast[4]
-const friday = weeklyForecast[5]
-const saturday = weeklyForecast[6]
-const sunday = weeklyForecast[7]
+//const monday = weeklyForecast[1]
+// const tuesday = weeklyForecast[2]
+// const wednesday = weeklyForecast[3]
+// const thursday = weeklyForecast[4]
+// const friday = weeklyForecast[5]
+// const saturday = weeklyForecast[6]
+// const sunday = weeklyForecast[7]
+
+let [{ day, temperature, cloudCoverage, wind }] = weeklyForecast;
+
+console.log(day);
+console.log(temperature);
 
 /*
   Destructuring objects - 
   Refactor the code below to use destructuring to assign values to these 3 variables
 */
 
-const mondayTemperature = monday.temperature
-const mondayCloudCoverage = monday.cloudCoverage
-const mondayWind = monday.wind
+// const mondayTemperature = monday.temperature
+// const mondayCloudCoverage = monday.cloudCoverage
+// const mondayWind = monday.wind
+
+const { day: mondayTemperature, cloudCoverage: mondayCloudCoverage, wind: mondayWind } = weeklyForecast;
 
 
+//const { day, mondayCloudCoverage, mondayWind } = weeklyForecast
+//console.log(day)
 
 /*Spread operator*/
 
@@ -97,8 +118,8 @@ and values currently on sunday but with a cloudCoverage property set to "broken"
 The new sunday object should look like this: 
 {day: "Sunday", temperature: 17, cloudCoverage: "broken", wind: 30}
 */
-
-
+let cloudCover = "broken"
+//const newSunday = [...weeklyForecast, cloudCoverage: cloudCover]
 
 /* 
   We need to generate a biweekly forecast from 2 weekly forecasts. 
@@ -126,4 +147,5 @@ const weekTwoForecast = [
   { day: "Sunday", temperature: 17, cloudCoverage: "overcast", wind: 30 }
 ]
 
-const biweeklyForecast = []
+const biweeklyForecast = [...weekOneForecast, weekTwoForecast]
+//console.log(biweeklyForecast)
